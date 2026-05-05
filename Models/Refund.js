@@ -1,0 +1,59 @@
+const Knex = require('../DataBase/Connection')
+
+class Refund{
+
+    async allRefunds(){
+        let refunds = await Knex.select("*").table("refund")
+        if(refunds.length>0){
+            return refunds
+        }else{
+            return false
+        }
+    }
+
+    async findById(id){
+        
+        let refund = await Knex.select("id", "refundDate", "refundAmmount", "interestAmmount", "member_id")
+            .where({ id: id }).table("refund")
+            if(refund.length > 0){
+                return refund
+            }else{
+                return false
+            }
+    }
+    
+    
+    async findByDate(refundDate){  
+        let refund = await Knex.select()
+            .where({ refundDate: refundDate }).table("refund")
+            if(refund.length > 0){
+                return refund
+            }else{
+                return false
+            }
+    }
+
+    async findByMemberId(member_id){ 
+        let refund = await Knex.select()
+            .where({ member_id: member_id }).table("refund").orderBy("refundDate", "desc")
+            if(refund.length > 0){
+                return refund
+            }else{
+                return false
+            }
+    }
+
+
+    async new(refundDate, refundAmount, interestPay, member_id, creator){
+        try {
+            await Knex.insert({ refundDate, refundAmount, interestPay, member_id, creator })
+                .table("refund")
+                return true
+        } catch (error) {
+            return error
+        }
+    }
+
+}
+
+module.exports = new Refund()
