@@ -7,7 +7,7 @@ const cors = require('cors')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(cors())
+app.use(cors({origin: '*'}))
 
 app.use('/', Router)
 app.use('/', (req, res)=> res.status(200).send("Pagina nao encontrada!"))
