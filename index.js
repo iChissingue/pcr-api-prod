@@ -1,13 +1,13 @@
-const bodyParser = require('body-parser')
 const express = require('express')
 const app = express()
-const Router = require('./Router/Router')
 const cors = require('cors')
+const bodyParser = require('body-parser')
+const Router = require('./Router/Router')
 
 
+app.use(cors({origin: '*'}))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(cors({origin: '*'}))
 
 app.use('/', Router)
 app.use('/', (req, res)=> res.status(200).send("Pagina nao encontrada!"))
