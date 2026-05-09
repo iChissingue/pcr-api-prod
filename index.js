@@ -5,7 +5,9 @@ const bodyParser = require('body-parser')
 const Router = require('./Router/Router')
 
 
-app.use(cors({origin: '*'}))
+app.use(cors({origin: '*'},
+    exposedHeaders: ['Authorization']
+))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
