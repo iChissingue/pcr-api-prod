@@ -3,13 +3,13 @@ const Knex = require('../DataBase/Connection')
 class LoginUserToken{
 
     async new(token, user_id){
-        await Knex.insert({token, user_id}).table("userLoginToken")
+        await Knex.insert({token, user_id}).table("userlogintoken")
         return true
     }
 
     async validate(token){
         let result = await Knex.select("token")
-            .from("userLoginToken").where({ token: token})
+            .from("usertogintoken").where({ token: token})
         if(result.length > 0){
             return { status: true, token: "Token valido" }
             
